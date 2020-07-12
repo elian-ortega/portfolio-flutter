@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_elian_ortega/constants.dart';
+import 'package:portfolio_elian_ortega/ui/widgets/post_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 enum ScreenType { Desktop, Tablet, Mobile }
-final numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,12 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Showcase'),
+        title: Text('Flutter Showcase by Elian Ortega'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: _BuildBody(),
-      ),
+      body: _BuildBody(),
       floatingActionButton: FloatingActionButton(onPressed: () {
         _launchURL();
       }),
@@ -59,22 +57,21 @@ class _DesktopBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('built Desktop');
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 3 / 2,
-        crossAxisSpacing: 20.0,
-        mainAxisSpacing: 20.0,
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 2 / 3,
+          crossAxisSpacing: 20.0,
+          mainAxisSpacing: 20.0,
+        ),
+        itemCount: posts.length,
+        itemBuilder: (context, index) {
+          return PostWidget(post: posts[index]);
+        },
       ),
-      itemCount: numbers.length,
-      itemBuilder: (context, index) {
-        return Card(
-          color: Colors.blue,
-          child: Center(
-            child: Text('${numbers[index]}'),
-          ),
-        );
-      },
     );
   }
 }
@@ -88,22 +85,20 @@ class _TabletBody extends StatelessWidget {
   Widget build(BuildContext context) {
     print('built Tablet');
 
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 3 / 2,
-        crossAxisSpacing: 20.0,
-        mainAxisSpacing: 20.0,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 2 / 3,
+          crossAxisSpacing: 20.0,
+          mainAxisSpacing: 20.0,
+        ),
+        itemCount: posts.length,
+        itemBuilder: (context, index) {
+          return PostWidget(post: posts[index]);
+        },
       ),
-      itemCount: numbers.length,
-      itemBuilder: (context, index) {
-        return Card(
-          color: Colors.blue,
-          child: Center(
-            child: Text('${numbers[index]}'),
-          ),
-        );
-      },
     );
   }
 }
@@ -115,19 +110,17 @@ class _MobileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: numbers.length,
-      itemBuilder: (context, index) {
-        return AspectRatio(
-          aspectRatio: 3 / 2,
-          child: Card(
-            color: Colors.blue,
-            child: Center(
-              child: Text('${numbers[index]}'),
-            ),
-          ),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      child: ListView.builder(
+        itemCount: posts.length,
+        itemBuilder: (context, index) {
+          return AspectRatio(
+            aspectRatio: 2 / 3,
+            child: PostWidget(post: posts[index]),
+          );
+        },
+      ),
     );
   }
 }
