@@ -11,8 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var _screenType = ScreenType.Desktop;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +54,6 @@ class _DesktopBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('built Desktop');
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
       child: GridView.builder(
@@ -83,8 +79,6 @@ class _TabletBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('built Tablet');
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
       child: GridView.builder(
