@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_elian_ortega/constants.dart';
-import 'package:portfolio_elian_ortega/ui/widgets/post_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../constants.dart';
+import '../shared/colors.dart';
+import '../widgets/my_app_bar.dart';
+import '../widgets/post_widget.dart';
 
 enum ScreenType { Desktop, Tablet, Mobile }
 
 class HomeScreen extends StatefulWidget {
+  static const String id = '/';
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -14,8 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Showcase by Elian Ortega'),
+      backgroundColor: kBackgroundColor,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: MyAppBar(),
       ),
       body: _BuildBody(),
       floatingActionButton: FloatingActionButton(onPressed: () {
@@ -65,7 +71,7 @@ class _DesktopBody extends StatelessWidget {
         ),
         itemCount: posts.length,
         itemBuilder: (context, index) {
-          return PostWidget(post: posts[index]);
+          return PostWidget(index: index);
         },
       ),
     );
@@ -90,7 +96,7 @@ class _TabletBody extends StatelessWidget {
         ),
         itemCount: posts.length,
         itemBuilder: (context, index) {
-          return PostWidget(post: posts[index]);
+          return PostWidget(index: index);
         },
       ),
     );
@@ -111,7 +117,7 @@ class _MobileBody extends StatelessWidget {
         itemBuilder: (context, index) {
           return AspectRatio(
             aspectRatio: 2 / 3,
-            child: PostWidget(post: posts[index]),
+            child: PostWidget(index: index),
           );
         },
       ),
